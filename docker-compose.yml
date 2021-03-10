@@ -15,7 +15,7 @@ services:
       - "8080:8080"
 
     volumes:
-      - "./apps_custom/nginx_reverse/nginx.conf:/etc/nginx/nginx.conf
+      - "./apps_custom/nginx_reverse/nginx.conf:/etc/nginx/nginx.conf"
 #    volumes:
 #      - ./data/nginx:${DATA_DIR}/nginx/etc
 #      - ./data/ssl:${DATA_DIR}/nginx/ssl
