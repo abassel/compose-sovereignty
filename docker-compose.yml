@@ -1,10 +1,31 @@
 ---
 
-# docker-compose up  -d     # Run in detached mode
+# docker-compose up  -d  --build   # Run in detached mode
 
 version: '3.3'
 
 services:
+
+#  nginx:
+#    container_name: rev_proxy_nginx
+#    image: nginx:1.15-alpine
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#
+#    volumes:
+#      - ./nginx.conf:/etc/nginx/nginx.conf
+##    volumes:
+#      - ./data/nginx:${DATA_DIR}/nginx/etc
+#      - ./data/ssl:${DATA_DIR}/nginx/ssl
+
+  bitwarden:
+    image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
+    expose:
+      - "80"
+    volumes:
+      - ./data/bitwarden:${DATA_DIR}/bitwarden
+    restart: on-failure
 
   mongo:
     container_name: mongodb
