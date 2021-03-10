@@ -15,7 +15,7 @@ services:
       - "8080:8080"
 
     volumes:
-      - "./nginx.conf:${PWD}/apps_custom/nginx_reverse/nginx.conf" #/etc/nginx/nginx.conf
+      - "/etc/nginx/nginx.conf:${PWD}/apps_custom/nginx_reverse/nginx.conf" #/etc/nginx/nginx.conf
 #    volumes:
 #      - ./data/nginx:${DATA_DIR}/nginx/etc
 #      - ./data/ssl:${DATA_DIR}/nginx/ssl
@@ -37,6 +37,7 @@ services:
 #      - ./data/ssl:${DATA_DIR}/nginx/ssl
 
   bitwarden:
+    container_name: bitwarden
     image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
 #    ports:
 #      - "80:80"
