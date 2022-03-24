@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+
+## Gitea - Selfhosted Git Service
+  #https://docs.gitea.io/en-us/fail2ban-setup/
+
+  ## Disable self registration during install, or with the DISABLE_REGISTRATION flag in gitea>conf>app.ini
+
+  gitea:
+    container_name: gitea
+    image: gitea/gitea:1.16.8
+    restart: $RESTART
+    ports:
+      - "3000:3000"
+      - "2222:2222"
+    volumes:
+      - $APP_DATA_DIR/gitea:/data
+    environment:
+      # https://docs.gitea.io/en-us/config-cheat-sheet/
+      - USER_UID=1000
+      - USER_GID=1000
+      - SSH_PORT=2222
+      - DB_TYPE=sqlite3
+      - RUN_MODE=prod
+      - "PROTOCOL=$HTTP_SCHEMA"
+      - "ROOT_URL=$HTTP_SCHEMA://gitea.$DOMAINNAME"
+      # https://discourse.gitea.io/t/i-cannot-programmatically-setup-users-in-a-docker-container/289
+      - DISABLE_REGISTRATION="true"
+#      - SECRET_KEY=password123
+#      - INSTALL_LOCK="true"
+    labels:
+      # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.gitea.entrypoints=$ENTRYPOINTS"
+      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
+#      - "traefik.http.routers.gitea-API-rtr.priority=10"
+      ## Middlewares
+#      - "traefik.http.routers.gitea-rtr.middlewares=secure-chain@file"
+      ## HTTP Services
+#      - "traefik.http.routers.gitea.service=gitea-svc"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+      ## TCP
+#      - "traefik.tcp.routers.gitea-tcp.entrypoints=ssh"
+#      - "traefik.tcp.routers.gitea-tcp.tls=true"
+#      - "traefik.tcp.routers.gitea-tcp.rule=HostSNI(`*`)"
+#      - "traefik.tcp.routers.gitea-tcp.service=gitea-tcp-svc"
+#      - "traefik.tcp.services.gitea-tcp-svc.loadbalancer.server.port=22"
+      ## API
+#      - "traefik.http.routers.gitea-API-rtr.entrypoints=https"
+#      - "traefik.http.routers.gitea-API-rtr.rule=HeadersRegexp(`X-Forwarded-URI`, `$URI`)"
+#      - "traefik.http.routers.gitea-API-rtr.priority=20"
+#      - "traefik.http.routers.gitea-API-rtr.middlewares=secure-headers@file"
+#      - "traefik.http.routers.gitea-API-rtr.service=gitea-svc"
+
