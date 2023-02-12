@@ -49,6 +49,7 @@ ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose --env-f
 
 
 ### Reference
+- https://sequentialread.com/creating-a-simple-but-effective-firewall-using-vanilla-docker-compose/
 - https://github.com/CVJoint/traefik2/blob/master/ymlfiles/bitwarden.yml
 - https://github.com/Gibdos/compose_collection
 - https://github.com/tomMoulard/make-my-server
