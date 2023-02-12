@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   traefik:
-    image: "traefik:v2.7"
+    image: "traefik:v2.9.6"
     container_name: "traefik"
     command:
       - "--log.level=DEBUG"
@@ -18,11 +18,15 @@ services:
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - web
+      - no_internet
 
-#  whoami:
-#    image: "traefik/whoami"
-#    container_name: "simple-service"
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.whoami.rule=Host(`whoami.blah`)"
-#      - "traefik.http.routers.whoami.entrypoints=web"
+networks:
+  no_internet:
+    name: no_internet
+    driver: bridge
+    internal: true # Block internet access
+  web:
+    name: web
+    driver: bridge

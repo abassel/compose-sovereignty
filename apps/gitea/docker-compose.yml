@@ -52,4 +52,5 @@ services:
 #      - "traefik.http.routers.gitea-API-rtr.priority=20"
 #      - "traefik.http.routers.gitea-API-rtr.middlewares=secure-headers@file"
 #      - "traefik.http.routers.gitea-API-rtr.service=gitea-svc"
-
+    networks:
+      - no_internet

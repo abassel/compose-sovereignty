@@ -76,7 +76,7 @@ services:
       - 1.1.1.1 #unbound
 #      - 10.2.0.200 # Points to unbound
     environment:
-      TZ: ${TZ}
+#      TZ: ${TZ}
       WEBPASSWORD: ${ADMIN_PASS_GLOBAL}
 #      ServerIP: 10.2.0.100 # Internal IP of pihole
       DNS1: 1.1.1.1 #unbound #10.2.0.200 # Unbound IP
@@ -100,3 +100,6 @@ services:
 #    networks:
 #      private_network:
 #        ipv4_address: 10.2.0.100
+    networks:
+      - no_internet
+      - web  # allow access to external DNS
