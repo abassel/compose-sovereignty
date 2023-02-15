@@ -8,10 +8,10 @@ services:
 
   gitea:
     container_name: gitea
-    image: gitea/gitea:1.16.8
+    image: gitea/gitea:1.18.3
     restart: $RESTART
     ports:
-      - "3000:3000"
+#      - "3000:3000"
       - "2222:2222"
     volumes:
       - $APP_DATA_DIR/gitea:/data
@@ -30,10 +30,10 @@ services:
 #      - INSTALL_LOCK="true"
     labels:
       # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
-      - "traefik.enable=true"
+#      - "traefik.enable=true"
       ## HTTP Routers
-      - "traefik.http.routers.gitea.entrypoints=$ENTRYPOINTS"
-      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
+#      - "traefik.http.routers.gitea.entrypoints=$ENTRYPOINTS"
+#      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
 #      - "traefik.http.routers.gitea-API-rtr.priority=10"
       ## Middlewares
 #      - "traefik.http.routers.gitea-rtr.middlewares=secure-chain@file"

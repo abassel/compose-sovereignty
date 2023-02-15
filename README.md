@@ -1,7 +1,8 @@
 # compose-sovereign
 A docker-compose file to build and maintain your own private cloud
 
-#### ⚠️**IMPORTANT**⚠️: Not intended to be exposed to the web. Host locally behind your router
+
+>#### ⚠️**IMPORTANT**⚠️: Not intended to be exposed to the web. Host locally behind your router
 
 
 ### Install
