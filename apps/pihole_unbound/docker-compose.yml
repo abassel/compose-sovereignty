@@ -82,24 +82,15 @@ services:
       DNS1: 1.1.1.1 #unbound #10.2.0.200 # Unbound IP
       DNS2: 1.0.0.1 #unbound #10.2.0.200 # If we don't specify two, it will auto pick google.
       IPv6: "no"
-    # Volumes store your data between container upgrades
     labels:
-      # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
-      - "traefik.enable=true"
-      ## HTTP Routers
-      - "traefik.http.routers.pihole.entrypoints=$ENTRYPOINTS"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.$DOMAINNAME`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
-    volumes:
+    volumes:  # Volumes store your data between container upgrades
       - "${APP_DATA_DIR}/pihole/etc-pihole/:/etc/pihole/"
       - "${APP_DATA_DIR}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN
-#    networks:
-#      private_network:
-#        ipv4_address: 10.2.0.100
     networks:
       - no_internet
       - web  # allow access to external DNS
