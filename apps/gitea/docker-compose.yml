@@ -29,6 +29,13 @@ services:
 #      - SECRET_KEY=password123
 #      - INSTALL_LOCK="true"
     labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Gitea"
+      - "homepage.icon=gitea.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://gitea.$DOMAINNAME/"
+      - "homepage.description=source control"
+
       # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
 #      - "traefik.enable=true"
       ## HTTP Routers
