@@ -84,6 +84,13 @@ services:
       IPv6: "no"
     labels:
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
+
+      - "homepage.group=Services"
+      - "homepage.name=PiHole"
+      - "homepage.icon=pihole.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://pihole.$DOMAINNAME/admin"
+      - "homepage.description=PiHole adblock server"
+
     volumes:  # Volumes store your data between container upgrades
       - "${APP_DATA_DIR}/pihole/etc-pihole/:/etc/pihole/"
       - "${APP_DATA_DIR}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"

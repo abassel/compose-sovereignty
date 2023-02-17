@@ -1,0 +1,18 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/bookmarks
+
+- Developer:
+    - Github:
+        - icon: github-light.png
+          href: https://www.github.com/
+
+- Social:
+    - Reddit:
+        - icon: reddit.png
+          href: https://www.reddit.com/
+
+- Entertainment:
+    - YouTube:
+        - icon: youtube-play.png
+          href: https://www.youtube.com/

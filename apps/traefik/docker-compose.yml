@@ -14,6 +14,14 @@ services:
       - "--providers.docker.network=no_internet"
       - "--providers.docker.defaultRule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.$DOMAINNAME`)"
       - "--entrypoints.web.address=:80"
+
+    labels:
+      - "homepage.group=Services"
+      - "homepage.name=Traefik"
+      - "homepage.icon=traefik.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://localhost:8080/"
+      - "homepage.description=Traefik Dashboard"
+
     ports:
       - "80:80"
       - "8080:8080"
