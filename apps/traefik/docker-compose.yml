@@ -19,12 +19,15 @@ services:
       - "homepage.group=Services"
       - "homepage.name=Traefik"
       - "homepage.icon=traefik.png"  # https://github.com/walkxcode/dashboard-icons
-      - "homepage.href=$HTTP_SCHEMA://localhost:8080/"
+      # - "homepage.href=$HTTP_SCHEMA://localhost:8080/"
+      - "homepage.href=$HTTP_SCHEMA://traefik.$DOMAINNAME/"
       - "homepage.description=Traefik Dashboard"
+
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
     ports:
       - "80:80"
-      - "8080:8080"
+#      - "8080:8080"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
