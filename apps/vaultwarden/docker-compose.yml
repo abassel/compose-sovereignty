@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.27.0-alpine
+    container_name: vaultwarden
+    restart: always
+    volumes:
+      - $APP_DATA_DIR/vaultwarden:/data
+    environment:
+      - SIGNUPS_ALLOWED=false
+      - WEBSOCKET_ENABLED=true
+    networks:
+      - no_internet
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Vaultwarden"
+      - "homepage.icon=bitwarden.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://vaultwarden.$DOMAINNAME/"
+      - "homepage.description=password manager"
+
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+
+#      - "traefik.enable=true"
+      # Entry point for http
+#      - "traefik.http.routers.bitwarden.entrypoints=http"
+#      - "traefik.http.routers.bitwarden.rule=Host(`bw.yourdomain`)"
+#      - "traefik.http.routers.bitwarden.service=bitwarden"
+#      # Entry Point for https
+#      - "traefik.http.routers.bitwarden.middlewares=https-redirect@file"
+#      - "traefik.http.routers.bitwarden-secure.middlewares=secureHeaders@file"
+#      - "traefik.http.routers.bitwarden-secure.entrypoints=https"
+#      - "traefik.http.routers.bitwarden-secure.rule=Host(`bw.yourdomain`)"
+#      - "traefik.http.routers.bitwarden-secure.service=bitwarden-secure"
+#      - "traefik.http.services.bitwarden-secure.loadbalancer.server.port=80"
+#      # Enable TLS
+#      - "traefik.http.routers.bitwarden-secure.tls=true"
+#      - "traefik.http.routers.bitwarden-secure.tls.certresolver=letsencrypt"
+#      # websocket
+#      - "traefik.http.routers.bitwarden-ws.entrypoints=https"
+#      - "traefik.http.routers.bitwarden-ws.rule=Host(`bw.sslfor.fun`) && Path(`/notifications/hub`)"
+#      - "traefik.http.middlewares.bitwarden-ws=bw-stripPrefix@file"
+#      - "traefik.http.middlewares.bitwarden-ws=secureHeaders@file"
+#      - "traefik.http.routers.bitwarden-ws.tls=true"
+#      - "traefik.http.routers.bitwarden-ws.tls.certresolver=letsencrypt"
+#      - "traefik.http.routers.bitwarden-ws.service=bitwarden-ws"
+#      - "traefik.http.services.bitwarden-ws.loadbalancer.server.port=3012"
