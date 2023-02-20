@@ -6,7 +6,7 @@ services:
     image: "traefik:v2.9.6"
     container_name: "traefik"
     command:
-      - "--log.level=DEBUG"
+#      - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--api.dashboard=true"
       - "--providers.docker=true"
@@ -14,6 +14,24 @@ services:
       - "--providers.docker.network=no_internet"
       - "--providers.docker.defaultRule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.$DOMAINNAME`)"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.websecure.address=:443"
+
+      # https://community.home-assistant.io/t/how-to-give-traefik-access-to-ha-with-ha-in-network-mode-host-on-the-same-machine-in-docker/458379
+      # Generate certs
+      - "--certificatesresolvers.le.acme.email=$CLOUDFLARE_EMAIL"
+      - "--certificatesresolvers.le.acme.storage=/acme.json"
+      - "--certificatesresolvers.le.acme.dnsChallenge=true"
+      - "--certificatesResolvers.le.acme.dnsChallenge.provider=cloudflare"
+      - "--certificatesResolvers.le.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53"
+#      - "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # DEBUG TEST
+      - "--entrypoints.websecure.http.tls.certResolver=le"
+
+    environment:
+      # https://go-acme.github.io/lego/dns/cloudflare/
+      - CF_API_EMAIL=$CLOUDFLARE_EMAIL
+      - CF_DNS_API_TOKEN=$CLOUDFLARE_API_KEY
 
     labels:
       - "homepage.group=Services"
@@ -25,12 +43,19 @@ services:
 
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
+
+      # Wildcard cert
+#      - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.$DOMAINNAME"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+
     ports:
       - "80:80"
 #      - "8080:8080"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "${APP_DATA_DIR}/traefik2/acme/acme.json:/acme.json"
     networks:
       - web
       - no_internet
