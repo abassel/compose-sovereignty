@@ -40,7 +40,7 @@ ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose --env-f
 - [ ] Gilab - git server  
 - [ ] Go CI/CD - CI/CD server
 - [x] MongoDB
-- [ ] Bitwarden - Password manager
+- [x] Vaultwarden - Password manager
 - [ ] PostgressSQL
 - [ ] Portainer-ce
 - [ ] Registry
@@ -59,4 +59,10 @@ ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose --env-f
 - https://github.com/nginx-proxy/nginx-proxy
 
 #### PENDING
+- https://github.com/CVJoint/traefik2/tree/master/ymlfiles <- 100s of good file examples 
+- https://sensorsiot.github.io/IOTstack/Containers/AdGuardHome/  <- 100s with nice docs  
 - https://github.com/search?q=traefik.http.routers&type=code
+- https://github.com/bunkerity/bunkerweb
+- https://www.wizcase.com/blog/most-secure-open-source-password-managers/ <- password managers  
+- https://apurva-shukla.me/blog/why-i-selfhost/  <- savings
+- https://hide.me/en/blog/awesome-self-hosted-privacy-and-security-tools/#Seafile <- alternatives
