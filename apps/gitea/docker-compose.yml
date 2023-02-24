@@ -17,11 +17,19 @@ services:
       - $APP_DATA_DIR/gitea:/data
     environment:
       # https://docs.gitea.io/en-us/config-cheat-sheet/
+      # https://docs.gitea.io/en-us/install-with-docker-rootless/#managing-deployments-with-environment-variables
       - USER_UID=1000
       - USER_GID=1000
       - SSH_PORT=2222
       - DB_TYPE=sqlite3
       - RUN_MODE=prod
+
+      - "GITEA__migrations__ALLOWED_DOMAINS=proxy,github.com,*.github.com"
+
+      - "GITEA__proxy__PROXY_ENABLED=true"
+      - "GITEA__proxy__PROXY_URL=http://proxy:3128"
+      - "GITEA__proxy__PROXY_HOSTS=**"
+
       - "PROTOCOL=$HTTP_SCHEMA"
       - "ROOT_URL=$HTTP_SCHEMA://gitea.$DOMAINNAME"
       # https://discourse.gitea.io/t/i-cannot-programmatically-setup-users-in-a-docker-container/289
