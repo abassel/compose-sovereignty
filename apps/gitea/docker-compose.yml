@@ -56,11 +56,10 @@ services:
 #      - "traefik.http.routers.gitea.service=gitea-svc"
       - "traefik.http.services.gitea.loadbalancer.server.port=3000"
       ## TCP
-#      - "traefik.tcp.routers.gitea-tcp.entrypoints=ssh"
-#      - "traefik.tcp.routers.gitea-tcp.tls=true"
-#      - "traefik.tcp.routers.gitea-tcp.rule=HostSNI(`*`)"
-#      - "traefik.tcp.routers.gitea-tcp.service=gitea-tcp-svc"
-#      - "traefik.tcp.services.gitea-tcp-svc.loadbalancer.server.port=22"
+      - "traefik.tcp.routers.gitea_ssh.entrypoints=ssh"
+      - "traefik.tcp.routers.gitea_ssh.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.gitea_ssh.service=gitea-tcp-svc"
+      - "traefik.tcp.services.gitea-tcp-svc.loadbalancer.server.port=22"
       ## API
 #      - "traefik.http.routers.gitea-API-rtr.entrypoints=https"
 #      - "traefik.http.routers.gitea-API-rtr.rule=HeadersRegexp(`X-Forwarded-URI`, `$URI`)"
