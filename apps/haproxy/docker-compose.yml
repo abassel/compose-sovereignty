@@ -1,0 +1,24 @@
+
+
+# https://github.com/Cloudstek/docker-haproxy/blob/master/docker-compose.yml
+
+version: '3.8'
+
+services:
+  haproxy:
+    image: haproxy:2.7.3-alpine
+    container_name: haproxy
+#    hostname: mail.abassel.com
+    restart: "no"
+    user: haproxy
+    environment:
+      - SMTP_SERVER=$SMTP_SERVER
+    ports:
+      - "8404:8404"
+      - "25:25"
+      - "465:465"
+    volumes:
+      - "${PWD}/apps/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    networks:
+      - no_internet
+      - web
