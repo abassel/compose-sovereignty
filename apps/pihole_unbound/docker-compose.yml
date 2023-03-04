@@ -1,0 +1,103 @@
+# Run this docker individually
+
+# Test variables/configuration
+# ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose config
+
+# Up
+# ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose up  -d  --build   # Run in detached mode
+
+version: '3.8'
+
+#networks:
+#  private_network:
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 10.2.0.0/24
+
+services:
+  unbound:
+    image: "mvance/unbound:latest"
+    restart: $RESTART
+    container_name: unbound
+    hostname: "unbound"
+    # ADDING THIS WILL CAUSE CONTAINER TO CRASH
+#    volumes:
+#      - "${APP_DATA_DIR}/unbound:/opt/unbound/etc/unbound/"
+#    networks:
+#      private_network:
+#        ipv4_address: 10.2.0.200
+
+  #  wireguard:
+  #    depends_on: [unbound, pihole]
+  #    image: linuxserver/wireguard
+  #    container_name: wireguard
+  #    cap_add:
+  #      - NET_ADMIN
+  #      - SYS_MODULE
+  #    environment:
+  #      - PUID=1000
+  #      - PGID=1000
+  #      - TZ=America/Los_Angeles # Change to your timezone
+  #      - SERVERPORT=51820
+  #      #- SERVERURL=my.ddns.net #optional - For use with DDNS (Uncomment to use)
+  #      - PEERS=1 # How many peers to generate for you (clients)
+  #      - PEERDNS=10.2.0.100 # Set it to point to pihole
+  #      - INTERNAL_SUBNET=10.6.0.0
+  #
+  #    volumes:
+  #      - ./wireguard:/config
+  #      - /lib/modules:/lib/modules
+  #    ports:
+  #      - "51820:51820/udp"
+  #    dns:
+  #      - 10.2.0.100 # Points to pihole
+  #      - 10.2.0.200 # Points to unbound
+  #    sysctls:
+  #      - net.ipv4.conf.all.src_valid_mark=1
+  #
+  #    restart: unless-stopped
+  #    networks:
+  #      private_network:
+  #        ipv4_address: 10.2.0.3
+
+  pihole:
+    image: pihole/pihole:2022.07.1
+    restart: $RESTART
+    depends_on: [ unbound ]
+    container_name: pihole
+    hostname: "pihole"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+#      - "4000:80"
+    dns:
+      - 1.1.1.1 #unbound
+#      - 10.2.0.200 # Points to unbound
+    environment:
+#      TZ: ${TZ}
+      WEBPASSWORD: ${ADMIN_PASS_GLOBAL}
+#      ServerIP: 10.2.0.100 # Internal IP of pihole
+      DNS1: 1.1.1.1 #unbound #10.2.0.200 # Unbound IP
+      DNS2: 1.0.0.1 #unbound #10.2.0.200 # If we don't specify two, it will auto pick google.
+      IPv6: "no"
+    labels:
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+
+      - "homepage.group=Services"
+      - "homepage.name=PiHole"
+      - "homepage.icon=pihole.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://pihole.$DOMAINNAME/admin"
+      - "homepage.description=PiHole adblock server"
+
+    volumes:  # Volumes store your data between container upgrades
+      - "${APP_DATA_DIR}/pihole/etc-pihole/:/etc/pihole/"
+      - "${APP_DATA_DIR}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - no_internet
+      - web  # allow access to external DNS
