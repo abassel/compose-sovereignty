@@ -24,10 +24,13 @@ ALL_FILES=$(find . -name 'docker-compose.yml' | awk '{print "-f "$0}' | tr "\n" 
 # -f ./apps/mongodb/docker-compose.yml -f ./apps/pihole_unbound/docker-compose.yml
 
 # Test variables/configuration
-ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose --env-file .env $(echo -n $ALL_FILES) config
+ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker compose --env-file .env $(echo -n $ALL_FILES) config
 
 # Run in detached mode
-ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose --env-file .env $(echo -n $ALL_FILES) up -d --build
+ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker compose --env-file .env $(echo -n $ALL_FILES) up -d --build
+
+# add /etc/hosts config
+make hosts >> /etc/hosts
 
 ```
 
