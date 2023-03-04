@@ -1,0 +1,65 @@
+version: "3.7"
+services:
+
+## Gitea - Selfhosted Git Service
+  #https://docs.gitea.io/en-us/fail2ban-setup/
+
+  ## Disable self registration during install, or with the DISABLE_REGISTRATION flag in gitea>conf>app.ini
+
+  gitea:
+    container_name: gitea
+    image: gitea/gitea:1.18.3
+    restart: $RESTART
+    volumes:
+      - $APP_DATA_DIR/gitea:/data
+    environment:
+      # https://docs.gitea.io/en-us/config-cheat-sheet/
+      # https://docs.gitea.io/en-us/install-with-docker-rootless/#managing-deployments-with-environment-variables
+      - USER_UID=1000
+      - USER_GID=1000
+
+      - "GITEA__database__DB_TYPE=sqlite3"
+
+      - "GITEA__migrations__ALLOWED_DOMAINS=proxy,github.com,*.github.com"
+
+      - "GITEA__proxy__PROXY_ENABLED=true"
+      - "GITEA__proxy__PROXY_URL=http://proxy:3128"
+      - "GITEA__proxy__PROXY_HOSTS=**"
+
+      - "GITEA__service__DISABLE_REGISTRATION=true"
+
+      - "PROTOCOL=$HTTP_SCHEMA"
+      - "ROOT_URL=$HTTP_SCHEMA://gitea.$DOMAINNAME"
+
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Gitea"
+      - "homepage.icon=gitea.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://gitea.$DOMAINNAME/"
+      - "homepage.description=source control"
+
+      # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
+#      - "traefik.enable=true"
+      ## HTTP Routers
+#      - "traefik.http.routers.gitea.entrypoints=$ENTRYPOINTS"
+#      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
+#      - "traefik.http.routers.gitea-API-rtr.priority=10"
+      ## Middlewares
+#      - "traefik.http.routers.gitea-rtr.middlewares=secure-chain@file"
+      ## HTTP Services
+#      - "traefik.http.routers.gitea.service=gitea-svc"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+      ## TCP
+      - "traefik.tcp.routers.gitea_ssh.entrypoints=ssh"
+      - "traefik.tcp.routers.gitea_ssh.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.gitea_ssh.service=gitea-tcp-svc"
+      - "traefik.tcp.services.gitea-tcp-svc.loadbalancer.server.port=22"
+      ## API
+#      - "traefik.http.routers.gitea-API-rtr.entrypoints=https"
+#      - "traefik.http.routers.gitea-API-rtr.rule=HeadersRegexp(`X-Forwarded-URI`, `$URI`)"
+#      - "traefik.http.routers.gitea-API-rtr.priority=20"
+#      - "traefik.http.routers.gitea-API-rtr.middlewares=secure-headers@file"
+#      - "traefik.http.routers.gitea-API-rtr.service=gitea-svc"
+    networks:
+      - no_internet
