@@ -6,7 +6,7 @@
 # Up
 # ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose up  -d  --build   # Run in detached mode
 
-version: '3.8'
+version: $VERSION
 
 services:
 
