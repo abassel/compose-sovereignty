@@ -3,7 +3,7 @@
 # https://docs.linuxserver.io/images/docker-nextcloud
 
 ---
-version: "3.8"
+version: $VERSION
 
 networks:
   no_internet_db:
