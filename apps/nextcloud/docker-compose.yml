@@ -41,10 +41,15 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
 
+#     https://github.com/nextcloud/docker
+
       - MYSQL_PASSWORD=$ADMIN_PASS_GLOBAL
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=$ADMIN_USER_GLOBAL
       - MYSQL_HOST=dbnc
+
+      # WebDav file sync will refuse to work because internally we use http inside docker-compose
+      - OVERWRITEPROTOCOL=https
 
 #      - ServerName=$HTTP_SCHEMA://nextcloud.$DOMAINNAME
 #      - NEXTCLOUD_ADMIN_USER=$ADMIN_USER_GLOBAL
