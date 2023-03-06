@@ -8,8 +8,10 @@ services:
     volumes:
       - $APP_DATA_DIR/vaultwarden:/data
     environment:
-      - SIGNUPS_ALLOWED=false
-      - WEBSOCKET_ENABLED=true
+      # https://github.com/dani-garcia/vaultwarden/blob/main/.env.template
+      - SIGNUPS_ALLOWED=true
+      - WEBSOCKET_ENABLED=false
+      - ADMIN_TOKEN=$ADMIN_PASS_GLOBAL
     networks:
       - no_internet
     labels:
