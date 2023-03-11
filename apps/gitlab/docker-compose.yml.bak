@@ -1,0 +1,37 @@
+
+# https://docs.gitlab.com/ee/install/docker.html
+
+version: '3.6'
+services:
+  gitlab:
+#    image: 'gitlab/gitlab-ce:latest'
+#    image: gitlab/gitlab-ce:15.9.0-ce.0
+    image: yrzr/gitlab-ce-arm64v8:15.9.0-ce.0
+    container_name: gitlab
+    restart: always
+#    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url "$HTTP_SCHEMA://gitlab.$DOMAINNAME"
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+    ports:
+      - '1080:80'
+      - '10443:443'
+      - '22:22'
+    volumes:
+      - '${APP_DATA_DIR}/gitlab/config:/etc/gitlab'
+      - '${APP_DATA_DIR}/gitlab/logs:/var/log/gitlab'
+      - '${APP_DATA_DIR}/gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+    networks:
+      - no_internet
+      - web
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Gitlab"
+      - "homepage.icon=gitlab.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://gitlab.$DOMAINNAME/"
+      - "homepage.description=Gitlab-CE source control"
+
+      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
