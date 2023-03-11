@@ -1,0 +1,76 @@
+
+# https://github.com/auxilincom/deploy-drone/blob/master/local/docker-compose.yml
+# https://blog.ruanbekker.com/blog/2021/03/09/cicd-with-droneci-and-gitea-using-docker-compose/
+
+version: '3.8'
+
+services:
+  drone-server:
+    image: drone/drone:2.16.0
+#    ports:
+#      - 8000:80
+#      - 9000:443
+    networks:
+      - no_internet
+    volumes:
+      - ${APP_DATA_DIR}/drone:/var/lib/drone/
+      - /var/run/docker.sock:/var/run/docker.sock
+#    env_file:
+#      - ./drone.env
+    restart: always
+    environment:
+#      - DRONE_GITHUB_SKIP_VERIFY=true
+      - DRONE_AGENTS_ENABLED=true
+      - DRONE_SERVER_HOST=localhost:8000
+      - DRONE_SERVER_PROTO=http
+      - DRONE_TLS_AUTOCERT=false
+      - DRONE_OPEN=false
+      - DRONE_HOST=http://localhost:8000
+      - DRONE_GITEA_SERVER=http://gitea:3000/
+
+      - DRONE_DATABASE_DRIVER=sqlite3
+      - DRONE_DATABASE_DATASOURCE=/data/database.sqlite
+#      - DRONE_GITEA_SERVER=http://${IP_ADDRESS}:3000/
+      - DRONE_GIT_ALWAYS_AUTH=false
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+
+      - DRONE_SERVER_HOST=${IP_ADDRESS}:3001
+
+      - DRONE_USER_CREATE=${DRONE_USER_CREATE}
+      - DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CLIENT_ID}
+      - DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CLIENT_SECRET}
+#      - DRONE_GITHUB=true
+      # Variables below set via drone.env file
+      # - DRONE_USER_CREATE=
+      # - DRONE_USER_FILTER=
+      # - DRONE_GITHUB_CLIENT_ID=
+      # - DRONE_GITHUB_CLIENT_SECRET=
+      # - DRONE_RPC_SECRET=
+
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Drone"
+      - "homepage.icon=drone.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://drone.$DOMAINNAME/"
+      - "homepage.description=Drone CICD server"
+
+      - "traefik.http.services.drone.loadbalancer.server.port=80"
+
+
+  drone-agent:
+    image: drone/agent:1.2.3
+    command: agent
+    restart: always
+    depends_on:
+      - drone-server
+    networks:
+      - no_internet
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#    env_file:
+#      - ./drone.env
+    environment:
+      - DRONE_RPC_SERVER=drone-server:8000
+      # Variables below set via drone.env file
+      # - DRONE_RPC_SECRET=
