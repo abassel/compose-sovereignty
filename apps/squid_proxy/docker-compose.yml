@@ -7,7 +7,8 @@ services:
     ports:
       - "3128:3128"
     volumes:
-      - ./squid.conf:/etc/squid/squid.conf
+      # ./squid.conf works in osx but not in linux
+      - ${PWD}/apps/squid_proxy/squid.conf:/etc/squid/squid.conf
     restart: always
     networks:
       - web
