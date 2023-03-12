@@ -6,7 +6,7 @@ version: $VERSION
 
 services:
   jenkins:
-    image: jenkins/jenkins:2.375.3-lts
+    image: jenkins/jenkins:2.387.1-lts
     privileged: true
     restart: $RESTART
     user: root
