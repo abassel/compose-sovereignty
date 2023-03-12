@@ -4,3 +4,4 @@ data/
 .idea/
 .env
 apps/homepage/config/logs
+**/.DS_Store
