@@ -1,4 +1,4 @@
-# compose-sovereign
+# compose-sovereignty
 A docker-compose file to build and maintain your own private cloud
 
 
@@ -10,9 +10,9 @@ A docker-compose file to build and maintain your own private cloud
 ```bash
 apt install -y docker.io docker-compose git
 
-git clone https://github.com/abassel/compose-sovereign.git
+git clone https://github.com/abassel/compose-sovereignty.git
 
-cd compose-sovereign/
+cd compose-sovereignty/
 
 # Copy sample variable list
 cp sample.env .env
