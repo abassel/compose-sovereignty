@@ -1,0 +1,54 @@
+version: $VERSION
+services:
+
+# https://www.nico-maas.de/?p=1189
+# https://github.com/jvanderneutstulen/gogs-docker-compose/blob/master/sqlite/docker-compose.yml
+
+  gogs:
+    container_name: gogs
+    image: gogs/gogs:0.13
+    restart: $RESTART
+    volumes:
+      - $APP_DATA_DIR/gogs:/data
+#    ports:
+#      - "10022:22"
+#      - "3000:3000"
+    environment:
+      - "USER_UID=501"
+      - "USER_GID=501"
+
+      - "PROTOCOL=$HTTP_SCHEMA"
+      - "ROOT_URL=$HTTP_SCHEMA://gogs.$DOMAINNAME"
+
+      - "GOGS_OFFLINE_MODE=true"
+
+      - "GOGS_DOMAIN=gogs.$DOMAINNAME"
+      - "GOGS_ROOT_URL=$HTTP_SCHEMA://gogs.$DOMAINNAME"
+
+      - "GOGS_MAIL_ENABLED=false"
+#      - "GOGS_MAIL_HOST=$SMTP_SERVER:25"
+#      - "GOGS_MAIL_FROM: '"GOGS" <noreply@example.com>'
+#      - "GOGS_MAIL_SKIP_VERIFY=true"
+
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Gogs"
+      - "homepage.icon=gogs.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://gogs.$DOMAINNAME/"
+      - "homepage.description=source control"
+
+      - "traefik.http.services.gogs.loadbalancer.server.port=3000"
+      ## TCP
+      - "traefik.tcp.routers.gogs_ssh.entrypoints=ssh"
+      - "traefik.tcp.routers.gogs_ssh.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.gogs_ssh.service=gitea-tcp-svc"
+      - "traefik.tcp.services.gogs-tcp-svc.loadbalancer.server.port=22"
+      ## API
+#      - "traefik.http.routers.gitea-API-rtr.entrypoints=https"
+#      - "traefik.http.routers.gitea-API-rtr.rule=HeadersRegexp(`X-Forwarded-URI`, `$URI`)"
+#      - "traefik.http.routers.gitea-API-rtr.priority=20"
+#      - "traefik.http.routers.gitea-API-rtr.middlewares=secure-headers@file"
+#      - "traefik.http.routers.gitea-API-rtr.service=gitea-svc"
+    networks:
+      - no_internet
