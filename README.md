@@ -1,9 +1,9 @@
 # compose-sovereignty
 A docker-compose file to build and maintain your own private cloud
 
-
->#### ⚠️**IMPORTANT**⚠️: Not intended to be exposed to the web. Host locally behind your router
-
+|⚠️ **WARNING**          |
+|:---------------------------|
+| Not intended to be exposed to the web. Host locally behind your router  |
 
 ### Install
 
@@ -34,23 +34,29 @@ make hosts >> /etc/hosts
 
 ```
 
-### Tech inside
-
+### Tech inside/Apps
 - [x] Pi-Hole - Block network adds
-- [ ] Joplin - Take notes
 - [x] Traefik - Reverse Proxy
 - [x] Gitea - git server
-- [ ] Gilab - git server  
-- [ ] Go CI/CD - CI/CD server
 - [x] MongoDB
 - [x] Vaultwarden - Password manager
+- [ ] Gollum notes
+- [ ] Papermerge DMS
+- [ ] Trillium notes
+- [ ] WikiJS
+- [ ] Focalboard
+- [ ] vscodium
+- [ ] Registry
+- [ ] n8n - https://n8n.io
+- [ ] strapi - https://strapi.io
+- [ ] Rocket chat
 - [ ] PostgressSQL
 - [ ] Portainer-ce
-- [ ] Registry
 
-### Env Config
-
-
+### TODO:
+- POC cloud9
+- Docs like https://github.com/pi-hole/docs/tree/master/docs
+- WAF - Docker container mod security - https://github.com/topics/modsecurity https://github.com/topics/waf
 
 ### Reference
 - https://sequentialread.com/creating-a-simple-but-effective-firewall-using-vanilla-docker-compose/
