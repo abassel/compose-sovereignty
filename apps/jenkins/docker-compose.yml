@@ -6,7 +6,9 @@ version: $VERSION
 
 services:
   jenkins:
-    image: jenkins/jenkins:2.387.1-lts
+    image: jenkins  #jenkins/jenkins:2.387.1-lts
+    build:
+      dockerfile: ${PWD}/apps/jenkins/Dockerfile
     privileged: true
     restart: $RESTART
     user: root
