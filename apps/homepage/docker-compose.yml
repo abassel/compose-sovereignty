@@ -5,8 +5,10 @@ services:
       image: ghcr.io/benphelps/homepage:v0.6.7
       container_name: homepage
       volumes:
-          - "/var/run/docker.sock:/var/run/docker.sock:ro"
-          - "${PWD}/apps/homepage/config:/app/config"
+          - /var/run/docker.sock:/var/run/docker.sock:ro
+          - ${PWD}/apps/homepage/config:/app/config
+          - /etc/timezone:/etc/timezone:ro
+          - /etc/localtime:/etc/localtime:ro
 #      ports:
 #          - 3000:3000
       restart: $RESTART

@@ -92,8 +92,10 @@ services:
       - "homepage.description=PiHole adblock server"
 
     volumes:  # Volumes store your data between container upgrades
-      - "${APP_DATA_DIR}/pihole/etc-pihole/:/etc/pihole/"
-      - "${APP_DATA_DIR}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+      - ${APP_DATA_DIR}/pihole/etc-pihole/:/etc/pihole/
+      - ${APP_DATA_DIR}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:

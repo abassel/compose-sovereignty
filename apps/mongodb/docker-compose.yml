@@ -18,6 +18,8 @@ services:
     restart: always
     volumes:
       - ${APP_DATA_DIR}/mongodb:/data/db
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${ADMIN_USER_GLOBAL}
       - MONGO_INITDB_ROOT_PASSWORD=${ADMIN_PASS_GLOBAL}
