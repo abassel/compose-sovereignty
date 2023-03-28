@@ -18,7 +18,9 @@ services:
       - "25:25"
       - "465:465"
     volumes:
-      - "${PWD}/apps/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+      - ${PWD}/apps/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - no_internet
       - web

@@ -9,6 +9,8 @@ services:
     volumes:
       # ./squid.conf works in osx but not in linux
       - ${PWD}/apps/squid_proxy/squid.conf:/etc/squid/squid.conf
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     restart: always
     networks:
       - web

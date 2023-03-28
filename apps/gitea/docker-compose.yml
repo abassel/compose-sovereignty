@@ -12,6 +12,8 @@ services:
     restart: $RESTART
     volumes:
       - $APP_DATA_DIR/gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     environment:
       # https://docs.gitea.io/en-us/config-cheat-sheet/
       # https://docs.gitea.io/en-us/install-with-docker-rootless/#managing-deployments-with-environment-variables

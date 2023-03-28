@@ -56,8 +56,10 @@ services:
       - "443:443"
       - "2222:2222"  # ssh
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "${APP_DATA_DIR}/traefik2/acme/acme.json:/acme.json"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${APP_DATA_DIR}/traefik2/acme/acme.json:/acme.json
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - web
       - no_internet
