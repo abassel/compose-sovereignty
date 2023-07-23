@@ -35,6 +35,7 @@ make hosts >> /etc/hosts
 ```
 
 ### Tech inside/Apps
+for more options visit https://www.opensourcealternative.to
 - [x] Pi-Hole - Block network adds
 - [x] Traefik - Reverse Proxy
 - [x] Gitea - git server
@@ -42,16 +43,30 @@ make hosts >> /etc/hosts
 - [x] Vaultwarden - Password manager
 - [ ] Gollum notes
 - [ ] Papermerge DMS
-- [ ] Trillium notes
+- [ ] Paperless-ngx - https://github.com/paperless-ngx/paperless-ngx
+- [ ] Trillium notes - https://github.com/zadam/trilium
+- [ ] Laverna - JavaScript note taking application with Markdown editor - https://github.com/Laverna/laverna
+- [ ] Zettlr - A Markdown Editor for the 21st century - https://github.com/Zettlr/Zettlr
+- [ ] Notesnook - encrypted note taking - https://github.com/streetwriters/notesnook
+- [ ] Standard Notes - An end-to-end encrypted notes app - https://github.com/standardnotes/app
+- [ ] Bangle-io - note taking app that saves notes locally in markdown - https://github.com/bangle-io/bangle-io
+- [ ] Ory Kratos
 - [ ] WikiJS
-- [ ] Focalboard
+- [ ] Focalboard - Trello, Notion, and Asana alternative - https://github.com/mattermost/focalboard
 - [ ] vscodium
 - [ ] Registry
 - [ ] n8n - https://n8n.io
 - [ ] strapi - https://strapi.io
+- [ ] WAF - Docker container mod security - https://github.com/topics/modsecurity https://github.com/topics/waf
 - [ ] Rocket chat
 - [ ] PostgressSQL
 - [ ] Portainer-ce
+- [ ] Infiscal - secret managment - https://infisical.com
+- [ ] Docuseal - DocuSign alternative. - https://github.com/docusealco/docuseal
+- [ ] Databag - federated messenger - https://github.com/balzack/databag
+- [ ] Plane - Open Source JIRA - https://github.com/makeplane/plane
+- [ ] Flagsmith - Feature flag and remote config - https://github.com/Flagsmith/flagsmith
+- [ ] Other self hosted flag managment tools - https://posthog.com/blog/best-open-source-feature-flag-tools
 
 ### TODO:
 - POC cloud9
