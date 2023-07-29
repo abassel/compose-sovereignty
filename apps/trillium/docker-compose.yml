@@ -1,0 +1,32 @@
+
+
+# https://www.cloudbees.com/blog/how-to-install-and-run-jenkins-with-docker-compose
+
+version: $VERSION
+
+services:
+  trilium:
+    image: zadam/trilium:0.60.4
+    restart: $RESTART
+#    ports:
+#      - 8080:8080
+#      - 50000:50000
+    container_name: trilium
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    volumes:
+      - $APP_DATA_DIR/trilium:/home/node/trilium-data
+
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - no_internet
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=Trilium"
+      - "homepage.icon=trilium.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://trilium.$DOMAINNAME/"
+      - "homepage.description=Trilium note taking"
+
+      - "traefik.http.services.trilium.loadbalancer.server.port=8080"
