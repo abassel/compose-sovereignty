@@ -47,8 +47,8 @@ for more options visit https://www.opensourcealternative.to
 - [ ] Trillium notes - https://github.com/zadam/trilium
 - [ ] Laverna - JavaScript note taking application with Markdown editor - https://github.com/Laverna/laverna
 - [ ] Zettlr - A Markdown Editor for the 21st century - https://github.com/Zettlr/Zettlr
-- [ ] Notesnook - encrypted note taking - https://github.com/streetwriters/notesnook
-- [ ] Standard Notes - An end-to-end encrypted notes app - https://github.com/standardnotes/app
+- ~~[ ] Notesnook - encrypted note taking - https://github.com/streetwriters/notesnook~~ Requires to create an account
+- ~~[ ] Standard Notes - An end-to-end encrypted notes app - https://github.com/standardnotes/app~~ Requires pay to support Markdown
 - [ ] Bangle-io - note taking app that saves notes locally in markdown - https://github.com/bangle-io/bangle-io
 - [ ] Ory Kratos
 - [ ] WikiJS
