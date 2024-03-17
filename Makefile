@@ -16,15 +16,6 @@ hosts: #TODO: add support for multiple ips and extract ips from ifconfig
 .PHONY: start
 .ONESHELL:
 start:
-	@echo "Enter value for ADMIN_USER_GLOBAL?"
-	@read ADMIN_USER_GLOBAL
-	#@echo "Your USERNAME is $$ADMIN_USER_GLOBAL"
-	@export ADMIN_USER_GLOBAL=$$ADMIN_USER_GLOBAL
-
-	@echo "Enter value for ADMIN_PASS_GLOBAL?"
-	@read -s ADMIN_PASS_GLOBAL
-	#@echo "Your PASSWORD is $$ADMIN_PASS_GLOBAL"
-	@export ADMIN_PASS_GLOBAL=$$ADMIN_PASS_GLOBAL
 
 	@ALL_FILES=$$(find . -name 'docker-compose.yml' | awk '{print "-f "$$0}' | tr "\n" " ");
 	#@echo $$ALL_FILES
