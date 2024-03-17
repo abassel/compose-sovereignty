@@ -14,6 +14,9 @@ services:
       - $APP_DATA_DIR/gitea:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      # UNTESTED, Format of /data/gitea/git/.ssh/authorized_keys don't match the host format
+      # see https://docs.gitea.com/next/installation/install-with-docker#ssh-container-passthrough
+      # - $HOME/.ssh/:/data/git/.ssh
     environment:
       # https://docs.gitea.io/en-us/config-cheat-sheet/
       # https://docs.gitea.io/en-us/install-with-docker-rootless/#managing-deployments-with-environment-variables
@@ -29,6 +32,11 @@ services:
       - "GITEA__proxy__PROXY_HOSTS=**"
 
       - "GITEA__service__DISABLE_REGISTRATION=true"
+
+      # SSH_PORT is used in the UI to generate the clone URL
+      # and SSH_LISTEN_PORT is defined as %(SSH_PORT)s  (SSH_LISTEN_PORT: %(SSH_PORT)s)
+      - "GITEA__server__SSH_PORT=2222"
+      - "GITEA__server__SSH_LISTEN_PORT=22"
 
       - "PROTOCOL=$HTTP_SCHEMA"
       - "ROOT_URL=$HTTP_SCHEMA://gitea.$DOMAINNAME"
