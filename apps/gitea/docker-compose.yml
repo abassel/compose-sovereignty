@@ -37,6 +37,7 @@ services:
       # and SSH_LISTEN_PORT is defined as %(SSH_PORT)s  (SSH_LISTEN_PORT: %(SSH_PORT)s)
       - "GITEA__server__SSH_PORT=2222"
       - "GITEA__server__SSH_LISTEN_PORT=22"
+      - "GITEA__server__LFS_START_SERVER=true"
 
       - "PROTOCOL=$HTTP_SCHEMA"
       - "ROOT_URL=$HTTP_SCHEMA://gitea.$DOMAINNAME"
