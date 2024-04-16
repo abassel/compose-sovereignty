@@ -69,9 +69,13 @@ for more options visit https://www.opensourcealternative.to
 - [ ] Other self hosted flag managment tools - https://posthog.com/blog/best-open-source-feature-flag-tools
 
 ### TODO:
+- Improve table of applications using table like https://gist.github.com/rxaviers/7360908
+- POC paperless-ngx - https://github.com/paperless-ngx/paperless-ngx
+- POC note taking app - https://bangle.io
 - POC cloud9
 - Docs like https://github.com/pi-hole/docs/tree/master/docs
 - WAF - Docker container mod security - https://github.com/topics/modsecurity https://github.com/topics/waf
+
 
 ### Reference
 - https://sequentialread.com/creating-a-simple-but-effective-firewall-using-vanilla-docker-compose/
