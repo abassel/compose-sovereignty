@@ -61,12 +61,12 @@ for more options visit https://www.opensourcealternative.to
 - [ ] Rocket chat
 - [ ] PostgressSQL
 - [ ] Portainer-ce
-- [ ] Infiscal - secret managment - https://infisical.com
+- [ ] Infiscal - secret management - https://infisical.com
 - [ ] Docuseal - DocuSign alternative. - https://github.com/docusealco/docuseal
 - [ ] Databag - federated messenger - https://github.com/balzack/databag
 - [ ] Plane - Open Source JIRA - https://github.com/makeplane/plane
 - [ ] Flagsmith - Feature flag and remote config - https://github.com/Flagsmith/flagsmith
-- [ ] Other self hosted flag managment tools - https://posthog.com/blog/best-open-source-feature-flag-tools
+- [ ] Other self hosted flag management tools - https://posthog.com/blog/best-open-source-feature-flag-tools
 
 ### TODO:
 - Improve table of applications using table like https://gist.github.com/rxaviers/7360908
