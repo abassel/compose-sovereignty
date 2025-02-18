@@ -6,8 +6,6 @@
 # Up
 # ADMIN_USER_GLOBAL=<USERNAME> ADMIN_PASS_GLOBAL=<PASSWORD> docker-compose up  -d  --build   # Run in detached mode
 
-version: $VERSION
-
 #networks:
 #  private_network:
 #    ipam:

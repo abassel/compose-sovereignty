@@ -1,4 +1,3 @@
-version: $VERSION
 services:
   proxy:
     image: ubuntu/squid:latest

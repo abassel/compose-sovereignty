@@ -1,4 +1,3 @@
-version: $VERSION
 services:
 
 ## Gitea - Selfhosted Git Service
