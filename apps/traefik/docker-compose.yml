@@ -13,6 +13,7 @@ services:
       - "--providers.docker.defaultRule=Host(`traefik.$DOMAINNAME`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.ssh.address=:2222"
+      - "--entrypoints.sshnb.address=:2233"
       - "--entrypoints.mongo.address=:27017"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
@@ -57,6 +58,7 @@ services:
       - "443:443"
       - "2222:2222"  # ssh
       - "27017:27017"  # mongodb
+      - "2233:2233"  # sshnb
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # https://williamhayes.medium.com/traefik-letsencrypt-and-acme-json-configuration-problems-5780c914351d
