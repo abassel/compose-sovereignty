@@ -1,8 +1,4 @@
-
-
 # https://github.com/Cloudstek/docker-haproxy/blob/master/docker-compose.yml
-
-version: $VERSION
 
 services:
   haproxy:
