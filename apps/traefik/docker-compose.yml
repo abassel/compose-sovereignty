@@ -13,6 +13,7 @@ services:
       - "--providers.docker.defaultRule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.$DOMAINNAME`)"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.ssh.address=:2222"
+      - "--entrypoints.sshnb.address=:2233"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.websecure.address=:443"
@@ -54,6 +55,7 @@ services:
 #      - "8080:8080"
       - "443:443"
       - "2222:2222"  # ssh
+      - "2233:2233"  # sshnb
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # https://williamhayes.medium.com/traefik-letsencrypt-and-acme-json-configuration-problems-5780c914351d
