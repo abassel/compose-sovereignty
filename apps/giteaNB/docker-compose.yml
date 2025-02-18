@@ -1,0 +1,66 @@
+
+services:
+
+## Gitea - Selfhosted Git Service
+  #https://docs.gitea.io/en-us/fail2ban-setup/
+
+  ## Disable self registration during install, or with the DISABLE_REGISTRATION flag in gitea>conf>app.ini
+
+  giteanb:
+    container_name: giteanb
+    image: gitea/gitea:1.23.6
+    restart: $RESTART
+    volumes:
+      - $APP_DATA_DIR/giteanb:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # UNTESTED, Format of /data/gitea/git/.ssh/authorized_keys don't match the host format
+      # see https://docs.gitea.com/next/installation/install-with-docker#ssh-container-passthrough
+      # - $HOME/.ssh/:/data/git/.ssh
+    environment:
+      # https://docs.gitea.io/en-us/config-cheat-sheet/
+      # https://docs.gitea.io/en-us/install-with-docker-rootless/#managing-deployments-with-environment-variables
+      - USER_UID=1000
+      - USER_GID=1000
+
+      - "GITEA__database__DB_TYPE=sqlite3"
+
+      - "GITEA__migrations__ALLOWED_DOMAINS=proxy,github.com,*.github.com"
+
+      - "GITEA__proxy__PROXY_ENABLED=true"
+      - "GITEA__proxy__PROXY_URL=http://proxy:3128"
+      - "GITEA__proxy__PROXY_HOSTS=**"
+
+      - "GITEA__service__DISABLE_REGISTRATION=true"
+
+      # SSH_PORT is used in the UI to generate the clone URL
+      # and SSH_LISTEN_PORT is defined as %(SSH_PORT)s  (SSH_LISTEN_PORT: %(SSH_PORT)s)
+      - "GITEA__server__SSH_PORT=2233"
+      - "GITEA__server__SSH_LISTEN_PORT=22"
+
+      - "PROTOCOL=$HTTP_SCHEMA"
+      - "ROOT_URL=$HTTP_SCHEMA://giteanb.$DOMAINNAME"
+
+    labels:
+
+      - "homepage.group=Services"
+      - "homepage.name=GiteaNB"
+      - "homepage.icon=gitea.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.href=$HTTP_SCHEMA://giteanb.$DOMAINNAME/"
+      - "homepage.description=source control NO BACKUP"
+
+      # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
+
+      - "traefik.enable=true"
+      - "traefik.http.routers.giteanb.service=giteanb"
+      - "traefik.http.routers.giteanb.rule=Host(`giteanb.$DOMAINNAME`)"
+      - "traefik.http.services.giteanb.loadbalancer.server.port=3000"
+
+      ## TCP
+      - "traefik.tcp.routers.giteanb_ssh.entrypoints=sshnb"
+      - "traefik.tcp.routers.giteanb_ssh.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.giteanb_ssh.service=giteanb-tcp-svc"
+      - "traefik.tcp.services.giteanb-tcp-svc.loadbalancer.server.port=22"
+
+    networks:
+      - no_internet
