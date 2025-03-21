@@ -66,8 +66,8 @@ services:
     container_name: pihole
     hostname: "pihole"
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      #- "53:53/tcp"
+      #- "53:53/udp"
       - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
 #      - "4000:80"
     dns:
