@@ -1,0 +1,89 @@
+name: Docker Compose Test
+
+on:
+  push:
+    branches: [ "**" ]  # Run on all branches
+  pull_request:
+    branches: [ "**" ]  # Run on PRs to all branches
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Copy environment file
+      run: cp sample.env .env
+
+    - name: output .env
+      run: cat .env
+
+    - name: Render config
+      run: make cmd config
+
+    - name: Build the stack
+      run: make start
+
+    - name: Wait for services to be ready
+      run: sleep 45
+
+    # - name: Check container health
+    #   run: |
+    #     docker compose ps --format json | jq -r '.[] | select(.State != "running") | .Name' > unhealthy.txt
+    #     if [ -s unhealthy.txt ]; then
+    #       echo "The following containers are not running:"
+    #       cat unhealthy.txt
+    #       exit 1
+    #     fi
+
+    # - name: Test Traefik
+    #   run: |
+    #     if curl -f http://localhost:8080/api/version; then
+    #       echo "Traefik is responding"
+    #     else
+    #       echo "Traefik health check failed"
+    #       exit 1
+    #     fi
+
+    # - name: Test MongoDB
+    #   run: |
+    #     docker compose exec -T mongodb mongosh --eval "db.runCommand({ping:1})" || exit 1
+
+    # - name: Test Gitea
+    #   run: |
+    #     if curl -f http://localhost:3000/api/v1/version; then
+    #       echo "Gitea API is responding"
+    #     else
+    #       echo "Gitea health check failed"
+    #       exit 1
+    #     fi
+
+    # - name: Test HAProxy
+    #   run: |
+    #     if curl -f http://localhost:8404/stats; then
+    #       echo "HAProxy stats page is accessible"
+    #     else
+    #       echo "HAProxy health check failed"
+    #       exit 1
+    #     fi
+
+    - name: Check service logs for errors
+      run: |
+        make cmd logs | grep -v 'error: port is missing' | grep -v 'Unable to obtain ACME certificate for domains' | grep -i 'error\|failed\|fatal' || true
+        # Don't fail the build on log errors, just show them
+
+    # - name: Verify network connectivity
+    #   run: |
+    #     docker compose exec -T traefik ping -c 1 mongodb || exit 1
+    #     docker compose exec -T traefik ping -c 1 gitea || exit 1
+
+    # - name: Check resource usage
+    #   run: |
+    #     docker stats --no-stream --format "table {{.Name}}	{{.CPUPerc}}	{{.MemUsage}}"
+
+    # - name: Cleanup
+    #   if: always()
+    #   run: |
+    #     docker compose logs > service_logs.txt
+    #     docker compose down --volumes --remove-orphans
