@@ -33,3 +33,14 @@ stop:
 
 	docker compose --env-file .env $$(echo $$ALL_FILES) down
 
+
+.PHONY: cmd
+.ONESHELL:
+cmd:
+	@ALL_FILES=$$(find . -name 'docker-compose.yml' | awk '{print "-f "$$0}' | tr "\n" " ");
+	#@echo $$ALL_FILES
+	@docker compose $$(echo $$ALL_FILES) --env-file .env $(filter-out $@,$(MAKECMDGOALS))
+
+%:
+	@:
+
