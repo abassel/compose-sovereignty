@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # Enable version updates for GitHub Actions in root directory
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: ":arrow_up:"
+    labels:
+      - "github-actions"
+      - "dependencies"
+      - "dependabot"
+
+
+  # Enable version updates for all apps directories
+  - package-ecosystem: "docker"
+    directories: ["/apps/*"]
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: ":arrow_up:"
+    labels:
+      - "docker"
+      - "dependencies"
+      - "dependabot"
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"
+
+
+  # Enable version updates for all apps directories
+  - package-ecosystem: "docker-compose"
+    directories: ["/apps/*"]
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: ":arrow_up:"
+    labels:
+      - "docker-compose"
+      - "dependencies"
+      - "dependabot"
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"
