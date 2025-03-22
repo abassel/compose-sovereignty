@@ -2,7 +2,7 @@
 
 services:
   trilium:
-    image: zadam/trilium:0.60.4
+    image: zadam/trilium:0.63.7
     restart: $RESTART
 #    ports:
 #      - 8080:8080
