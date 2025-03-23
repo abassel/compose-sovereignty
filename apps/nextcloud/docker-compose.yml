@@ -13,7 +13,7 @@ networks:
 services:
 
   dbnc:
-    image: mariadb:10.5
+    image: mariadb:11.7
     restart: $RESTART
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     container_name: dbnc
@@ -32,7 +32,7 @@ services:
       - no_internet_db
 
   nextcloud:
-    image: nextcloud:25.0.3   #lscr.io/linuxserver/nextcloud:latest
+    image: nextcloud:31.0.2   #lscr.io/linuxserver/nextcloud:latest
     restart: $RESTART
     container_name: nextcloud
     depends_on:
