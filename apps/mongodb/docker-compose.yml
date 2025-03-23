@@ -9,7 +9,7 @@
 services:
 
   mongo:
-    image: mongo:5.0.6-focal
+    image: mongo:6.0.4-focal
     container_name: mongodb
     ports:
       - "27017:27017"
