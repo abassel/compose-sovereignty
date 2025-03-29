@@ -85,7 +85,7 @@ services:
 
       - "homepage.group=Services"
       - "homepage.name=PiHole"
-      - "homepage.icon=pihole.png"  # https://github.com/walkxcode/dashboard-icons
+      - "homepage.icon=pi-hole.png"  # https://github.com/walkxcode/dashboard-icons
       - "homepage.href=$HTTP_SCHEMA://pihole.$DOMAINNAME/admin"
       - "homepage.description=PiHole adblock server"
 
