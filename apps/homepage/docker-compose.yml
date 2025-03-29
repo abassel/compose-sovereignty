@@ -10,6 +10,8 @@ services:
 #      ports:
 #          - 3000:3000
       restart: $RESTART
+      environment:
+        - HOMEPAGE_ALLOWED_HOSTS=*
       labels:
           - "traefik.http.services.homepage.loadbalancer.server.port=3000"
       networks:
