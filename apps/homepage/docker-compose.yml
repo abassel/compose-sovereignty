@@ -1,6 +1,6 @@
 services:
   homepage:
-      image: ghcr.io/gethomepage/homepage:v0.10.9
+      image: ghcr.io/gethomepage/homepage:v1.0.4
       container_name: homepage
       volumes:
           - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -10,6 +10,8 @@ services:
 #      ports:
 #          - 3000:3000
       restart: $RESTART
+      environment:
+        - HOMEPAGE_ALLOWED_HOSTS=*
       labels:
           - "traefik.http.services.homepage.loadbalancer.server.port=3000"
       networks:
