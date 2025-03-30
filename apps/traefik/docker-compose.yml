@@ -10,7 +10,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedByDefault=true"
       - "--providers.docker.network=no_internet"
-      - "--providers.docker.defaultRule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.$DOMAINNAME`)"
+      - "--providers.docker.defaultRule=Host(`traefik.$DOMAINNAME`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -45,7 +45,7 @@ services:
 
 
       # Wildcard cert
-#      - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
+      - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
       - "traefik.http.routers.traefik.tls.domains[0].sans=*.$DOMAINNAME"
       - "traefik.http.routers.traefik.tls.certresolver=le"
 
