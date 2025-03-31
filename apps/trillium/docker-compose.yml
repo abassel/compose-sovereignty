@@ -25,4 +25,7 @@ services:
       - "homepage.href=$HTTP_SCHEMA://trilium.$DOMAINNAME/"
       - "homepage.description=Trilium note taking"
 
+      - "traefik.enable=true"
+      - "traefik.http.routers.trilium.service=trilium"
+      - "traefik.http.routers.trilium.rule=Host(`trilium.$DOMAINNAME`)"
       - "traefik.http.services.trilium.loadbalancer.server.port=8080"

@@ -49,16 +49,11 @@ services:
       - "homepage.description=source control"
 
       # https://doc.traefik.io/traefik/reference/dynamic-configuration/docker/
-#      - "traefik.enable=true"
-      ## HTTP Routers
-#      - "traefik.http.routers.gitea.entrypoints=$ENTRYPOINTS"
-#      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
-#      - "traefik.http.routers.gitea-API-rtr.priority=10"
-      ## Middlewares
-#      - "traefik.http.routers.gitea-rtr.middlewares=secure-chain@file"
-      ## HTTP Services
-#      - "traefik.http.routers.gitea.service=gitea-svc"
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitea.service=gitea"
+      - "traefik.http.routers.gitea.rule=Host(`gitea.$DOMAINNAME`)"
       - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+
       ## TCP
       - "traefik.tcp.routers.gitea_ssh.entrypoints=ssh"
       - "traefik.tcp.routers.gitea_ssh.rule=HostSNI(`*`)"

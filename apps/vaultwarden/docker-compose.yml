@@ -23,6 +23,9 @@ services:
       - "homepage.href=$HTTP_SCHEMA://vaultwarden.$DOMAINNAME/"
       - "homepage.description=password manager"
 
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.service=vaultwarden"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.$DOMAINNAME`)"
       - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
 
 #      - "traefik.enable=true"
