@@ -8,9 +8,9 @@ services:
       - "--api.insecure=true"
       - "--api.dashboard=true"
       - "--providers.docker=true"
-      - "--providers.docker.exposedByDefault=true"
+      - "--providers.docker.exposedByDefault=false"
       - "--providers.docker.network=no_internet"
-      - "--providers.docker.defaultRule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.$DOMAINNAME`)"
+      - "--providers.docker.defaultRule=Host(`traefik.$DOMAINNAME`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -41,11 +41,14 @@ services:
       - "homepage.href=$HTTP_SCHEMA://traefik.$DOMAINNAME/"
       - "homepage.description=Traefik Dashboard"
 
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.service=traefik"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.$DOMAINNAME`)"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
 
       # Wildcard cert
-#      - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
+      - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
       - "traefik.http.routers.traefik.tls.domains[0].sans=*.$DOMAINNAME"
       - "traefik.http.routers.traefik.tls.certresolver=le"
 

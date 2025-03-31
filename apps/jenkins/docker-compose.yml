@@ -28,4 +28,7 @@ services:
       - "homepage.href=$HTTP_SCHEMA://jenkins.$DOMAINNAME/"
       - "homepage.description=Jenkins"
 
+      - "traefik.enable=true"
+      - "traefik.http.routers.jenkins.service=jenkins"
+      - "traefik.http.routers.jenkins.rule=Host(`jenkins.$DOMAINNAME`)"
       - "traefik.http.services.jenkins.loadbalancer.server.port=8080"
