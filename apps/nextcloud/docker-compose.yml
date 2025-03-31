@@ -77,4 +77,7 @@ services:
       - "homepage.href=$HTTP_SCHEMA://nextcloud.$DOMAINNAME/"
       - "homepage.description=Nextcloud"
 
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.service=nextcloud"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.$DOMAINNAME`)"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
