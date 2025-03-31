@@ -13,6 +13,10 @@ services:
       environment:
         - HOMEPAGE_ALLOWED_HOSTS=*
       labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.homepage.service=homepage"
+          - "traefik.http.routers.homepage.rule=Host(`$DOMAINNAME`) || Host(`homepage.$DOMAINNAME`)"   # Both root domain and subdomain
           - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+
       networks:
         - no_internet
