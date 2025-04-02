@@ -28,21 +28,6 @@ services:
       - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.$DOMAINNAME`)"
       - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
 
-#      - "traefik.enable=true"
-      # Entry point for http
-#      - "traefik.http.routers.bitwarden.entrypoints=http"
-#      - "traefik.http.routers.bitwarden.rule=Host(`bw.yourdomain`)"
-#      - "traefik.http.routers.bitwarden.service=bitwarden"
-#      # Entry Point for https
-#      - "traefik.http.routers.bitwarden.middlewares=https-redirect@file"
-#      - "traefik.http.routers.bitwarden-secure.middlewares=secureHeaders@file"
-#      - "traefik.http.routers.bitwarden-secure.entrypoints=https"
-#      - "traefik.http.routers.bitwarden-secure.rule=Host(`bw.yourdomain`)"
-#      - "traefik.http.routers.bitwarden-secure.service=bitwarden-secure"
-#      - "traefik.http.services.bitwarden-secure.loadbalancer.server.port=80"
-#      # Enable TLS
-#      - "traefik.http.routers.bitwarden-secure.tls=true"
-#      - "traefik.http.routers.bitwarden-secure.tls.certresolver=letsencrypt"
 #      # websocket
 #      - "traefik.http.routers.bitwarden-ws.entrypoints=https"
 #      - "traefik.http.routers.bitwarden-ws.rule=Host(`bw.sslfor.fun`) && Path(`/notifications/hub`)"

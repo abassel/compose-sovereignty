@@ -69,6 +69,7 @@ services:
     networks:
       - no_internet
       - no_internet_db
+
     labels:
 
       - "homepage.group=Services"

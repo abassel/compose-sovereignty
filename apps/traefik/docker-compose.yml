@@ -37,7 +37,6 @@ services:
       - "homepage.group=Services"
       - "homepage.name=Traefik"
       - "homepage.icon=traefik.png"  # https://github.com/walkxcode/dashboard-icons
-      # - "homepage.href=$HTTP_SCHEMA://localhost:8080/"
       - "homepage.href=$HTTP_SCHEMA://traefik.$DOMAINNAME/"
       - "homepage.description=Traefik Dashboard"
 
@@ -45,7 +44,6 @@ services:
       - "traefik.http.routers.traefik.service=traefik"
       - "traefik.http.routers.traefik.rule=Host(`traefik.$DOMAINNAME`)"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
-
 
       # Wildcard cert
       - "traefik.http.routers.traefik.tls.domains[0].main=$DOMAINNAME"
