@@ -8,7 +8,7 @@
   <h1 align="center">🏰 Compose Sovereignty</h1>
 
   <p align="center">
-    🚀 Your personal self-hosted cloud infrastructure using Docker Compose **_tightly_** integrated with Traefik and Homepage
+    🚀 Your personal self-hosted cloud infrastructure using Docker Compose <strong><em><ins>tightly</ins></em></strong> integrated with <strong><em><ins>Traefik</ins></em></strong> and <strong><em><ins>Homepage</ins></em></strong>
     <!-- <br />
     <a href="https://abassel.github.io/compose-sovereignty/"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,7 +79,7 @@ sudo make hosts >> /etc/hosts
 <table align="center">
   <tr>
     <td align="center"><a href="apps/gitea"><img src="apps/gitea/icon.png" width="75px;" height="75px;" alt="Gitea"/><br /><b>Gitea</b></a></td>
-    <!-- <td align="center"><a href="apps/haproxy"><img src="apps/haproxy/icon.png" width="75px;" height="75px;" alt="HAProxy"/><br /><b>HAProxy</b></a></td> -->
+    <td align="center"><a href="apps/haproxy"><img src="apps/haproxy/icon.png" width="75px;" height="75px;" alt="HAProxy"/><br /><b>HAProxy</b></a></td>
     <td align="center"><a href="apps/homepage"><img src="apps/homepage/icon.png" width="75px;" height="75px;" alt="Homepage"/><br /><b>Homepage</b></a></td>
     <td align="center"><a href="apps/jenkins"><img src="apps/jenkins/icon.png" width="75px;" height="75px;" alt="Jenkins"/><br /><b>Jenkins</b></a></td>
     <td align="center"><a href="apps/mongodb"><img src="apps/mongodb/icon.png" width="75px;" height="75px;" alt="MongoDB"/><br /><b>MongoDB</b></a></td>
@@ -87,7 +87,7 @@ sudo make hosts >> /etc/hosts
   </tr>
   <tr>
     <td align="center"><a href="apps/pihole_unbound"><img src="apps/pihole_unbound/icon.png" width="75px;" height="75px;" alt="Pi-hole"/><br /><b>Pi-hole</b></a></td>
-    <!-- <td align="center"><a href="apps/squid_proxy"><img src="apps/squid_proxy/icon.png" width="75px;" height="75px;" alt="Squid"/><br /><b>Squid</b></a></td> -->
+    <td align="center"><a href="apps/squid_proxy"><img src="apps/squid_proxy/icon.png" width="75px;" height="75px;" alt="Squid"/><br /><b>Squid</b></a></td>
     <td align="center"><a href="apps/traefik"><img src="apps/traefik/icon.png" width="75px;" height="75px;" alt="Traefik"/><br /><b>Traefik</b></a></td>
     <td align="center"><a href="apps/trillium"><img src="apps/trillium/icon.png" width="75px;" height="75px;" alt="Trilium"/><br /><b>Trilium</b></a></td>
     <td align="center"><a href="apps/vaultwarden"><img src="apps/vaultwarden/icon.png" width="75px;" height="75px;" alt="Vaultwarden"/><br /><b>Vaultwarden</b></a></td>
