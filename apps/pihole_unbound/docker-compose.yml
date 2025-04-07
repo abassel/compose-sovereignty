@@ -60,7 +60,7 @@ services:
   #        ipv4_address: 10.2.0.3
 
   pihole:
-    image: pihole/pihole:2025.03.1
+    image: pihole/pihole:2025.04.0
     restart: $RESTART
     depends_on: [ unbound ]
     container_name: pihole
