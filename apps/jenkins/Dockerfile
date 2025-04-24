@@ -5,7 +5,7 @@
 
 # https://docs.docker.com/engine/install/debian/
 
-FROM jenkins/jenkins:2.492.2-lts
+FROM jenkins/jenkins:2.492.3-lts
 
 WORKDIR /var/jenkins_home
 
