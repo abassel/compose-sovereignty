@@ -2,7 +2,7 @@
 
 services:
   haproxy:
-    image: haproxy:3.2.1-alpine
+    image: haproxy:3.2.4-alpine
     container_name: haproxy
 #    hostname: mail.abassel.com
     restart: "no"
