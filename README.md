@@ -91,6 +91,7 @@ sudo make hosts >> /etc/hosts
     <td align="center"><a href="apps/traefik"><img src="apps/traefik/icon.png" width="75px;" height="75px;" alt="Traefik"/><br /><b>Traefik</b></a></td>
     <td align="center"><a href="apps/trillium"><img src="apps/trillium/icon.png" width="75px;" height="75px;" alt="Trilium"/><br /><b>Trilium</b></a></td>
     <td align="center"><a href="apps/vaultwarden"><img src="apps/vaultwarden/icon.png" width="75px;" height="75px;" alt="Vaultwarden"/><br /><b>Vaultwarden</b></a></td>
+    <td align="center"><a href="apps/paperless_ngx"><img src="apps/paperless_ngx/icon.png" width="75px;" height="75px;" alt="Paperless-ngx"/><br /><b>Paperless-ngx</b></a></td>
   </tr>
 </table>
 
@@ -98,7 +99,7 @@ sudo make hosts >> /etc/hosts
 
 | Category | Services |
 |----------|----------|
-| **Document Management** | • Paperless-ngx<br>• Papermerge DMS |
+| **Document Management** | • Papermerge DMS |
 | **Note Taking** | • Gollum<br>• Bangle.io<br>• Zettlr |
 | **Project Management** | • Plane (JIRA alternative)<br>• Focalboard (Trello alternative) |
 | **Development** | • VSCodium<br>• Registry<br>• n8n<br>• Cloud9<br>• Code Server |
