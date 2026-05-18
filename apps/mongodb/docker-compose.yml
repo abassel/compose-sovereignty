@@ -29,3 +29,32 @@ services:
       - "traefik.tcp.routers.mongo.rule=HostSNI(`*`)"
       - "traefik.tcp.routers.mongo.service=mongo-tcp-svc"
       - "traefik.tcp.services.mongo-tcp-svc.loadbalancer.server.port=27017"
+
+  mongo-express:
+    image: mongo-express:1.0.2-20-alpine3.19
+    container_name: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${ADMIN_USER_GLOBAL}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${ADMIN_PASS_GLOBAL}
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_BASICAUTH_USERNAME=${ADMIN_USER_GLOBAL}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ADMIN_PASS_GLOBAL}
+    networks:
+      - no_internet
+    labels:
+      - "homepage.group=Services"
+      - "homepage.name=Mongo Express"
+      - "homepage.icon=mongo-express.png"
+      - "homepage.href=$HTTP_SCHEMA://mongo-express.$DOMAINNAME/"
+      - "homepage.description=MongoDB Web UI"
+
+      - "traefik.enable=true"
+      - "traefik.http.routers.mongo-express.service=mongo-express"
+      - "traefik.http.routers.mongo-express.rule=Host(`mongo-express.$DOMAINNAME`)"
+      - "traefik.http.services.mongo-express.loadbalancer.server.port=8081"
