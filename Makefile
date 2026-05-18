@@ -11,6 +11,7 @@ hosts: #TODO: add support for multiple ips and extract ips from ifconfig
     for dir in $$DIRS; do \
         echo 127.0.0.1\\t\\t$$dir.$$DOMAINNAME; \
     done
+	@echo 127.0.0.1\\t\\tmongoman.$$DOMAINNAME
 
 
 .PHONY: start

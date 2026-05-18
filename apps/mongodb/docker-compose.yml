@@ -29,3 +29,28 @@ services:
       - "traefik.tcp.routers.mongo.rule=HostSNI(`*`)"
       - "traefik.tcp.routers.mongo.service=mongo-tcp-svc"
       - "traefik.tcp.services.mongo-tcp-svc.loadbalancer.server.port=27017"
+
+  mongoman:
+    image: ghcr.io/aientech/mongoman:0.2.1
+    container_name: mongoman
+    restart: always
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://${ADMIN_USER_GLOBAL}:${ADMIN_PASS_GLOBAL}@mongodb:27017
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - no_internet
+    labels:
+      - "homepage.group=Services"
+      - "homepage.name=MongoMan"
+      - "homepage.icon=mongodb.png"
+      - "homepage.href=$HTTP_SCHEMA://mongoman.$DOMAINNAME/"
+      - "homepage.description=MongoDB admin interface"
+
+      - "traefik.enable=true"
+      - "traefik.http.routers.mongoman.service=mongoman"
+      - "traefik.http.routers.mongoman.rule=Host(`mongoman.$DOMAINNAME`)"
+      - "traefik.http.services.mongoman.loadbalancer.server.port=3000"
