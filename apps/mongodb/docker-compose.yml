@@ -31,7 +31,7 @@ services:
       - "traefik.tcp.services.mongo-tcp-svc.loadbalancer.server.port=27017"
 
   mongo-express:
-    image: mongo-express:1.0.2-20-alpine3.19
+    image: mongo-express:1-18-alpine3.19
     container_name: mongo-express
     restart: always
     depends_on:
