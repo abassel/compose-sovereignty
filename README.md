@@ -92,6 +92,9 @@ sudo make hosts >> /etc/hosts
     <td align="center"><a href="apps/trillium"><img src="apps/trillium/icon.png" width="75px;" height="75px;" alt="Trilium"/><br /><b>Trilium</b></a></td>
     <td align="center"><a href="apps/vaultwarden"><img src="apps/vaultwarden/icon.png" width="75px;" height="75px;" alt="Vaultwarden"/><br /><b>Vaultwarden</b></a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="apps/paperless_ngx"><img src="apps/paperless_ngx/icon.png" width="75px;" height="75px;" alt="Paperless-ngx"/><br /><b>Paperless-ngx</b></a></td>
+  </tr>
 </table>
 
 ## 🔮 Planned Services
@@ -106,9 +109,24 @@ sudo make hosts >> /etc/hosts
 | **Communication** | • Rocket.chat<br>• Databag |
 | **Business Tools** | • Docuseal<br>• Flagsmith |
 
+## 📋 Roadmap
+
+- [ ] Add Check script for the following items
+  - [ ] Add readme to all services
+  - [ ] Add note about internet isolation
+  - [ ] Add yaml linter to check script
+- [ ] Makefile
+  - [ ] Add makefile version check
+  - [ ] Fix makefile to support subcommands like: make cmd logs -f
+- [ ] Add contributing guide
+- [ ] Add PR automation with questions about the PR
+- [ ] Add mkdocs documentation (following Pi-hole docs style)
+- [ ] Set up WAF with Coraza
+
 ## 📚 Resources
 
 ### Similar Projects
+- [JimsGarage](https://github.com/JamesTurland/JimsGarage/tree/main) <- 
 - [Traefik2 YML Examples](https://github.com/CVJoint/traefik2/tree/master/ymlfiles) <- 100s of good file examples 
 - [IOTstack Documentation](https://sensorsiot.github.io/IOTstack/Containers/AdGuardHome/)  <- 100s good example with nice docs
 - [Bunkerized Web Server](https://github.com/bunkerity/bunkerweb)
