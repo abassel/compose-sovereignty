@@ -32,7 +32,7 @@ services:
       - no_internet_db
 
   nextcloud:
-    image: nextcloud:34.0.0   #lscr.io/linuxserver/nextcloud:latest
+    image: nextcloud:34.0.1   #lscr.io/linuxserver/nextcloud:latest
     restart: $RESTART
     container_name: nextcloud
     depends_on:
